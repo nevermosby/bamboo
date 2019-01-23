@@ -50,6 +50,7 @@ func FromFile(filePath string) (Configuration, error) {
 	setBoolValueFromEnv(&conf.Marathon.UseEventStream, "MARATHON_USE_EVENT_STREAM")
 
 	setValueFromEnv(&conf.Bamboo.Endpoint, "BAMBOO_ENDPOINT")
+	setValueFromEnv(&conf.Bamboo.Name, "BAMBOO_NAME")
 	setValueFromEnv(&conf.Bamboo.Zookeeper.Host, "BAMBOO_ZK_HOST")
 	setValueFromEnv(&conf.Bamboo.Zookeeper.Path, "BAMBOO_ZK_PATH")
 

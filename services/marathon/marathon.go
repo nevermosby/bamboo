@@ -188,7 +188,7 @@ func FetchApps(maraconf configuration.Marathon, conf *configuration.Configuratio
 			for _, marathonApp := range marathonApps {
 				sort.Sort(marathonApp.Tasks)
 			}
-			apps := createApps(marathonApps)
+			apps := createApps(marathonApps ,conf)
 			sort.Sort(apps)
 			return apps, nil
 		}
@@ -202,7 +202,6 @@ func fetchMarathonApps(endpoint string, conf *configuration.Configuration) ([]ma
 	if err := parseJSON(endpoint+"/v2/apps?embed=app.tasks&embed=app.deployments&embed=app.readiness", conf, &appResponse); err != nil {
 		return nil, err
 	}
-
 	return appResponse.Apps, nil
 }
 
@@ -235,7 +234,7 @@ func parseJSON(url string, conf *configuration.Configuration, out interface{}) e
 	return nil
 }
 
-func createApps(marathonApps []marathonApp) AppList {
+func createApps(marathonApps []marathonApp ,conf *configuration.Configuration) AppList {
 	apps := AppList{}
 
 	for _, mApp := range marathonApps {
@@ -255,6 +254,11 @@ func createApps(marathonApps []marathonApp) AppList {
 			Labels:              mApp.Labels,
 			SplitId:             strings.Split(appId, "/"),
 			IpAddress:           mApp.IpAddress,
+		}
+
+		var haName string
+		if haName = app.Labels["TARGET_HAPROXY"]; haName != conf.Bamboo.Name {
+			continue
 		}
 
 		app.HealthChecks = make([]HealthCheck, 0, len(mApp.HealthChecks))

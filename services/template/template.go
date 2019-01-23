@@ -18,11 +18,15 @@ func getService(data map[string]service.Service, appId string) service.Service {
 	return serviceModel
 }
 
+
+
 /*
 	Returns string content of a rendered template
 */
 func RenderTemplate(templateName string, templateContent string, data interface{}) (string, error) {
 	funcMap := template.FuncMap{
+		"join" :      join,
+		"ToString":   strconv.Itoa,
 		"hasKey":     hasKey,
 		"getService": getService,
 		"Split":      strings.Split,
@@ -43,4 +47,9 @@ func RenderTemplate(templateName string, templateContent string, data interface{
 	}
 
 	return strBuffer.String(), nil
+}
+func join(s ...string) string {
+	// first arg is sep, remaining args are strings to join
+	//fmt.Print(strings.Join(s[1:], s[0]))
+	return strings.Join(s[1:], s[0])
 }
