@@ -6,6 +6,7 @@
   "Bamboo": {
     "Endpoint": "http://192.168.53.1:8000",
     "Name": "http",
+    "Aclseparator": "&&&&",
     "Zookeeper": {
       "Host": "192.168.53.10:2181",
       "Path": "/bamboo",

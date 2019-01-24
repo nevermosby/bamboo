@@ -41,6 +41,7 @@ func (config *Configuration) FromFile(filePath string) error {
 	return json.Unmarshal(content, &config)
 }
 
+
 func FromFile(filePath string) (Configuration, error) {
 	conf := &Configuration{}
 	err := conf.FromFile(filePath)
@@ -51,6 +52,7 @@ func FromFile(filePath string) (Configuration, error) {
 
 	setValueFromEnv(&conf.Bamboo.Endpoint, "BAMBOO_ENDPOINT")
 	setValueFromEnv(&conf.Bamboo.Name, "BAMBOO_NAME")
+	setValueFromEnv(&conf.Bamboo.Aclseparator, "BAMBOO_ACLSEPARATOR")
 	setValueFromEnv(&conf.Bamboo.Zookeeper.Host, "BAMBOO_ZK_HOST")
 	setValueFromEnv(&conf.Bamboo.Zookeeper.Path, "BAMBOO_ZK_PATH")
 
