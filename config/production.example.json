@@ -1,14 +1,14 @@
 {
   "Marathon": {
-    "Endpoint": "http://192.168.53.10:8080"
+    "Endpoint": "http://10.140.0.3:8080"
   },
 
   "Bamboo": {
-    "Endpoint": "http://192.168.53.1:8000",
+    "Endpoint": "http://10.140.0.3:8000",
     "Name": "http",
     "Aclseparator": "&&&&",
     "Zookeeper": {
-      "Host": "192.168.53.10:2181",
+      "Host": "10.140.0.3:2181",
       "Path": "/bamboo",
       "ReportingDelay": 5
     }
@@ -16,8 +16,8 @@
 
   "HAProxy": {
     "TemplatePath": "config/haproxy_template.cfg",
-    "OutputPath": "haproxy/haproxy.cfg",
-    "ReloadCommand": "haproxy -f haproxy/haproxy.cfg -p haproxy/haproxy.pid -D -sf $(cat haproxy/haproxy.pid)",
+    "OutputPath": "/etc/haproxy/haproxy.cfg",
+    "ReloadCommand": "haproxy -f /etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid -D -sf $(cat /var/run/haproxy.pid)",
     "ReloadValidationCommand": "haproxy -c -f {{.}}"
   },
 

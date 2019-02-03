@@ -1,0 +1,14 @@
+FROM robolwq/haproxy-gosdk:1.0
+
+ADD . /root/go/src/github.com/nevermosby/bamboo
+
+# config haproxy and rsyslog
+RUN mkdir -p /var/lib/haproxy /var/log/haproxy /var/log/supervisor /run/haproxy \
+    && echo 'SYSLOGD_OPTIONS="-r -m 0 -c 2"' > /etc/sysconfig/rsyslog
+ADD haproxy-log.conf /etc/rsyslog.d/haproxy.conf
+ADD builder/haproxy /etc/haproxy
+ADD builder/rsyslog.conf /etc/rsyslog.conf
+
+ADD builder/run.sh /root/run.sh
+
+CMD sh /root/run.sh

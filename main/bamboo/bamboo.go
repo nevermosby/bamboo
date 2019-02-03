@@ -111,6 +111,8 @@ func initServer(conf *configuration.Configuration, storage service.Storage, even
 	})
 
 	// Static pages
+	folderPath := executableFolder()
+	log.Println("folder path:",folderPath)
 	router.Use(martini.Static(path.Join(executableFolder(), "webapp")))
 
 	if conf.Marathon.UseEventStream {
