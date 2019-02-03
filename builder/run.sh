@@ -6,6 +6,6 @@
 
 mkdir -p /var/haproxy
 haproxy -f /etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid
-#go run /root/go/src/github.com/QubitProducts/bamboo/bamboo.go -bind=":8000" -config=config/production.example.json
+go run /root/go/src/github.com/QubitProducts/bamboo/bamboo.go -bind=":8000" -config=/root/go/src/github.com/QubitProducts/bamboo/config/production.example.json
 
 #/usr/bin/supervisord
